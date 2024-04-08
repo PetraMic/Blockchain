@@ -19,8 +19,8 @@ class Miner {
         String hash = "";
         while (true) {
             nonce++;
-            hash = Hasher.hash(gson.toJson(oldBlock) + transaction + nonce);
-            if (isValidHash(hash)) {
+            hash = Hasher.hash(gson.toJson(oldBlock) + transaction + nonce + oldBlock.getPreviousHash());
+            if (hash.substring(0, difficulty).equals(target)) {
                 break;
             }
         }
